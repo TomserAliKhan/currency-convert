@@ -27,28 +27,28 @@ function apiFeach(){
 
   fetch(API)
   .then(res=>{
-
-   return res.json();
+    if (!res.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return res.json();
   })
   .then(data=>{
+    if (!data.conversion_rates) {
+      throw new Error('No conversion rates found');
+    }
     
-   
-  let {conversion_rates}=data;
-  
+    const {conversion_rates} = data;
     setApiRes(conversion_rates)
-    showdata(apiRes)
-    
+    showdata(conversion_rates) // Use the direct value instead of state
     return conversion_rates;
   })
-  .then(dat=>{let all= Object.keys(dat)
-      setOption(all)
-    
-    
+  .then(dat=>{
+    const all = Object.keys(dat)
+    setOption(all)
     setLoding(false)
-    
   })
   .catch(err=>{
-   seterror(err)
+   seterror(err.message)
    setLoding(false)
   })
 
