@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { ContexData } from "../contex/Contex";
-
+ import { ToastContainer, toast } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
 import { useState } from "react";
 import axios from "axios";
 
@@ -10,18 +11,19 @@ import axios from "axios";
 let API=import.meta.env.VITE_API_URL;
 
 
-
 const App = () => {
-  const [ans, setAns] = useState("usd");
-  const [input, setInput] = useState("USD");
+  const [ans, setAns] = useState("");
+  const [input, setInput] = useState(2);
   const [fromOption, setFromOption] = useState();
   const [toOption, setToOption] = useState();
   const [Data,setData]=useState('')
   const [isLoding,setIsLoding]=useState(false)
   const [active, setactive] = useState(false);
+
+
   
  let option=[
-  
+  "select",
   "INR","AED","AFN","ALL","AMD","ANG","AOA","ARS","AUD","AWG","AZN","BAM","BBD",
   "BDT","BGN","BHD","BIF","BMD","BND","BOB","BRL","BSD","BTN","BWP","BYN","BZD",
   "CAD","CDF","CHF","CLF","CLP","CNH","CNY","COP","CRC","CUP","CVE","CZK","DJF",
@@ -34,24 +36,43 @@ const App = () => {
   "RON","RSD","RUB","RWF","SAR","SBD","SCR","SDG","SEK","SGD","SHP","SLE","SLL",
   "SOS","SRD","SSP","STN","SYP","SZL","THB","TJS","TMT","TND","TOP","TRY","TTD",
   "TVD","TWD","TZS","UAH","UGX","USD","UYU","UZS","VES","VND","VUV","WST","XAF",
-  "XCD","XCG","XDR","XOF","XPF","YER","ZAR","ZMW","ZWL"
-];
+  "XCD","XCG","XDR","XOF","XPF","YER","ZAR","ZMW","ZWL",
+]
 
+let calculate=()=>{
+  let curent=Data[fromOption];
+  let toAns=Data[toOption] ;
+  
+ {
+  curent!==undefined ?  setAns(`current:  ${curent} toAns: ${toAns}`):''
+ }
+ let inp=Number(input)
+ let finalans=inp*toAns
+
+   {
+  curent!==undefined ?  setAns(`${fromOption}:${curent} ${toOption}: ${finalans}`):''
+ }
+ 
+  
+}
+
+useEffect(calculate,[Data])
 
   let apiCall=async()=>{
     setIsLoding(true)
     try{
-    
-  let res=await axios.get(API+toOption);
+  if (toOption  ==='') {
+    toast.error('Failed to submit data.');
+    return;
+  }
+  let res=await axios.get(API+fromOption);
   
-   setData(res.data.conversion_rates)
-
-
-  
-  
+ setData(res.data.conversion_rates)
+   toast.success('Data Feachd successfully!');
+   
     }
     catch(err){
-      alert(err)
+     toast.error('Failed to submit data.');
     }
 
   setIsLoding(false)
@@ -75,18 +96,25 @@ const swap = () => {
   
 
 //useEffect(apiCall,[])
-const convert=()=>{
-    apiCall()
+const convert= ()=>{
+     apiCall();
+  
   
     
 }
 
 
 let props={setFromOption,setToOption}
+
   return (
     <ContexData.Provider value={props}>
       <div className=" h-screen  bg-[#450693]/80 flex justify-center items-center">
-        <section className="h-[390px] w-[90%]  lg:w-[60%] lg:h-[50%] rounded-2xl bg-white">
+        <section className="h-[410px] w-[90%]  lg:w-[60%] lg:h-[50%] rounded-2xl bg-white">
+      
+   <div>
+ 
+      <ToastContainer />
+    </div>
           <h1 className="text-center text-2xl font-bold py-3 border-b-[1.5px] border-gray-300">
             Currency Converter
           </h1>
@@ -208,11 +236,20 @@ let props={setFromOption,setToOption}
             {ans}
            </div>
 
-            <button className="active:scale-95 active:bg-[#1c0866]/40 w-full bg-[#1c0866]/80 rounded text-center py-2 text-white my-3 cursor-pointer"
+ <button   className='active:scale-95  w-1/3 bg-[#1c0866]/80 rounded text-center py-2 text-white mt-3 cursor-pointer'
+            onClick={()=>calculate()}
+            >
+          Calculate 
+            </button>
+
+
+
+            <button  className="active:scale-95 active:bg-[#1c0866]/40 w-full bg-[#1c0866]/80 rounded text-center py-2 text-white my-3 cursor-pointer"
             onClick={()=>convert()}
             >
               Get Exchange Rate
             </button>
+           
           </div>
         </section>
       </div>
