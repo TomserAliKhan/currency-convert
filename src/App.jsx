@@ -62,24 +62,43 @@ useEffect(calculate,[Data])
 
   let apiCall=async()=>{
     setIsLoding(true)
+    // Create loading toast
+    const loadingToastId = toast.loading('Fetching exchange rates...');
+    
     try{
-  if (toOption  ==='') {
-    toast.error('empty currency!');
-    return;
-  }
-  let res=await axios.get(API+fromOption);
-  
- setData(res.data.conversion_rates)
-   toast.success('Data Feachd successfully!');
-   
+      if (toOption  ==='') {
+        toast.update(loadingToastId, {
+          render: 'Please select a currency!',
+          type: 'error',
+          isLoading: false,
+          autoClose: 3000
+        });
+        return;
+      }
+      
+      let res = await axios.get(API+fromOption);
+      setData(res.data.conversion_rates)
+      
+      // Update loading toast to success
+      toast.update(loadingToastId, {
+        render: 'Exchange rates fetched successfully!',
+        type: 'success',
+        isLoading: false,
+        autoClose: 2000
+      });
     }
     catch(err){
-     toast.error(err);
+      // Update loading toast to error
+      toast.update(loadingToastId, {
+        render: err.message || 'Failed to fetch exchange rates',
+        type: 'error',
+        isLoading: false,
+        autoClose: 3000
+      });
     }
-
-  setIsLoding(false)
-  
-
+    finally {
+      setIsLoding(false)
+    }
 }
   
 
