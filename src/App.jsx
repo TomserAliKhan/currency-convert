@@ -46,6 +46,9 @@ let clickCalculate=()=>{
   {
     if (curent!==undefined){
   inp!==undefined ?  setAns(`${fromOption}:${curent} =${toOption}: ${finalans}`):''
+  }else{
+      toast.error('Please Get Exchange Rate!')
+      
   }
  }
 
