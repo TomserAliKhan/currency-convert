@@ -147,7 +147,7 @@ let props={setFromOption,setToOption}
 
 <div className="flex relative">
       <select
-        className="p-1 w-16   bg-white border  border-gray-500/55 rounded-md appearance-none lg:w-20"
+        className="p-1 w-20   bg-white border  border-gray-500/55 rounded-md appearance-none lg:w-20"
         value={fromOption}
         onClick={() => setactive((e) => !e)}
         onChange={(e)=>setFromOption(e.target.value)}
@@ -195,7 +195,7 @@ let props={setFromOption,setToOption}
               </button>
 <div className="flex relative">
       <select
-        className="p-1 w-16   bg-white border  border-gray-500/55 rounded-md appearance-none lg:w-20"
+        className="p-1 w-20   bg-white border  border-gray-500/55 rounded-md appearance-none lg:w-20"
         value={toOption}
         onClick={() => setactive((e) => !e)}
           onChange={(e)=>setToOption(e.target.value)}
