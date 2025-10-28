@@ -135,7 +135,7 @@ let props={setFromOption,setToOption}
   return (
     <ContexData.Provider value={props}>
       <div className=" h-screen  bg-[#450693]/80 flex justify-center items-center">
-        <section className="h-[410px] w-[90%]  lg:w-[60%] lg:h-[56%] rounded-2xl bg-white">
+        <section className="h-[410px] w-[90%]  lg:w-[40%] lg:h-[56%] rounded-2xl bg-white">
       
    <div>
  
@@ -145,7 +145,7 @@ let props={setFromOption,setToOption}
             Currency Converter
           </h1>
 
-          <div className="flex flex-col items-center p-7 pt-5 ">
+          <div className="flex flex-col justify-center items-center p-7 pt-5 ">
             <label htmlFor="input" className=" self-start font-semibold">
               {" "}
               Enter Amount
@@ -164,7 +164,7 @@ let props={setFromOption,setToOption}
               <h1 className="font-semibold">From</h1>
               <h1 className="w-16 text-start font-semibold">To</h1>
             </div>
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between  w-full">
 
 
 
