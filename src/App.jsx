@@ -64,7 +64,7 @@ useEffect(calculate,[Data])
     setIsLoding(true)
     try{
   if (toOption  ==='') {
-    toast.error('empty currency');
+    toast.error('empty currency!');
     return;
   }
   let res=await axios.get(API+fromOption);
