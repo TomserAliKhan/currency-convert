@@ -44,7 +44,9 @@ let clickCalculate=()=>{
  let inp=Number(input)
  let finalans=inp*toAns
   {
+    if (curent!==undefined){
   inp!==undefined ?  setAns(`${fromOption}:${curent} =${toOption}: ${finalans}`):''
+  }
  }
 
 }
