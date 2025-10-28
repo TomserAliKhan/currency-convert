@@ -234,7 +234,7 @@ let props={setFromOption,setToOption}
 
 
             </div>
-           <div className="self-start py-3 text-2xl font-semibold"> 
+           <div className="self-start py-3 text-xl lg:text-2xl font-semibold"> 
             {ans}
            </div>
 
