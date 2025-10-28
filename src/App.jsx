@@ -135,7 +135,7 @@ let props={setFromOption,setToOption}
   return (
     <ContexData.Provider value={props}>
       <div className=" h-screen  bg-[#450693]/80 flex justify-center items-center">
-        <section className="h-[410px] w-[90%]  lg:w-[60%] lg:h-[50%] rounded-2xl bg-white">
+        <section className="h-[410px] w-[90%]  lg:w-[60%] lg:h-[56%] rounded-2xl bg-white">
       
    <div>
  
