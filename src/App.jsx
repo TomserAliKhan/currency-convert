@@ -12,8 +12,8 @@ let API=import.meta.env.VITE_API_URL;
 
 
 const App = () => {
-  const [ans, setAns] = useState("");
-  const [input, setInput] = useState(2);
+  const [ans, setAns] = useState("G-E-R");
+  const [input, setInput] = useState(1);
   const [fromOption, setFromOption] = useState();
   const [toOption, setToOption] = useState();
   const [Data,setData]=useState('')
@@ -38,19 +38,21 @@ const App = () => {
   "TVD","TWD","TZS","UAH","UGX","USD","UYU","UZS","VES","VND","VUV","WST","XAF",
   "XCD","XCG","XDR","XOF","XPF","YER","ZAR","ZMW","ZWL",
 ]
+let clickCalculate=()=>{
+   let toAns=Data[toOption] ;
+   let curent=Data[fromOption];
+ let inp=Number(input)
+ let finalans=inp*toAns
+  {
+  inp!==undefined ?  setAns(`${fromOption}:${curent} =${toOption}: ${finalans}`):''
+ }
 
+}
 let calculate=()=>{
   let curent=Data[fromOption];
   let toAns=Data[toOption] ;
-  
- {
-  curent!==undefined ?  setAns(`current:  ${curent} toAns: ${toAns}`):''
- }
- let inp=Number(input)
- let finalans=inp*toAns
-
    {
-  curent!==undefined ?  setAns(`${fromOption}:${curent} ${toOption}: ${finalans}`):''
+  curent!==undefined ?  setAns(`${fromOption}:${curent} =${toOption}: ${toAns}`):''
  }
  
   
@@ -237,7 +239,7 @@ let props={setFromOption,setToOption}
            </div>
 
  <button   className='active:scale-95  w-1/3 bg-[#1c0866]/80 rounded text-center py-2 text-white mt-3 cursor-pointer'
-            onClick={()=>calculate()}
+            onClick={()=>clickCalculate()}
             >
           Calculate 
             </button>
